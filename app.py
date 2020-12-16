@@ -19,9 +19,17 @@ def home():
 @app.route("/sparql", methods=["POST", "GET"])
 def sparql():
     if request.method == "POST":
-        query = request.form.get("query")
+        query = {}
+        query['title'] = request.form.get("title")
+        query['cast'] = request.form.get("cast")
+        query['director'] = request.form.get("director")        
+        query['writer'] = request.form.get("writer")        
+        query['genre'] = request.form.get("genre")        
+        query['rating'] = request.form.get("rating")        
+        query['company'] = request.form.get("company")        
+
         sparql = SparqlRepository()
-        return jsonify({"result": sparql.get_all_triples(query)})
+        return jsonify({"result": sparql.get_triples(query)})
     else:
         return render_template("index.html")
 

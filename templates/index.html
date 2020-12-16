@@ -20,7 +20,9 @@
       </div>
       <!-- Search form -->
       <form action="{{ url_for('sparql') }}" method="post" class="md-form mt-0">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="query">
+        <input class="form-control" type="text" placeholder="Title" aria-label="Search" name="title">
+        <input class="form-control" type="text" placeholder="Cast" aria-label="Search" name="cast">
+        <input class="form-control" type="text" placeholder="Genre" aria-label="Search" name="genre">
         <button class="btn btn-primary" type="submit">Submit form</button>
       </form>
       
