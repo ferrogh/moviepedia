@@ -29,7 +29,8 @@ def sparql():
         query['company'] = request.form.get("company")        
 
         sparql = SparqlRepository()
-        return jsonify({"result": sparql.get_triples(query)})
+        return render_template("index.html", results=sparql.get_triples(query))
+        # return sparql.get_triples(query)
     else:
         return render_template("index.html")
 

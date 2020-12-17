@@ -22,9 +22,30 @@
       <form action="{{ url_for('sparql') }}" method="post" class="md-form mt-0">
         <input class="form-control" type="text" placeholder="Title" aria-label="Search" name="title">
         <input class="form-control" type="text" placeholder="Cast" aria-label="Search" name="cast">
+        <input class="form-control" type="text" placeholder="Director" aria-label="Search" name="director">
+        <input class="form-control" type="text" placeholder="Writer" aria-label="Search" name="writer">
         <input class="form-control" type="text" placeholder="Genre" aria-label="Search" name="genre">
+        <input class="form-control" type="text" placeholder="Rating" aria-label="Search" name="rating">
+        <input class="form-control" type="text" placeholder="Company" aria-label="Search" name="company">
         <button class="btn btn-primary" type="submit">Submit form</button>
       </form>
+
+      {% if results %}
+      <br><br>
+      <p class='lead'><strong>Query Results</strong></p>
+        {% for movie in results.results.bindings %}
+        <div class="container">
+            <br>
+            <p class="lead"><strong>{{ movie.title.value }}</strong></p>
+            <p>{{ movie.genres.value }} | {{ movie.rating.value }} | {{ movie.runtime.value }} minutes</p>
+            <p>Casts: {{ movie.casts.value }}</p>
+            <p>Directors: {{ movie.directors.value }}</p>
+            <p>Writers: {{ movie.writers.value }}</p>
+            <p>{{ movie.description.value }}</p>
+            <br>
+        </div class="container">
+        {% endfor %}
+      {% endif %}
       
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <div>Icons made by 
