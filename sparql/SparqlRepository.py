@@ -30,7 +30,7 @@ class SparqlRepository:
             PREFIX dbo: <http://dbpedia.org/ontology/>
             PREFIX dbp: <http://dbpedia.org/property/>
 
-            SELECT ?title (group_concat(distinct ?cast;separator=", ") as ?casts) (group_concat(distinct ?director;separator=", ") as ?directors) (group_concat(distinct ?writer;separator=", ") as ?writers) ?description ?genre ?rating ?releaseDate ?company ?runtime
+            SELECT ?title (group_concat(distinct ?cast;separator=", ") as ?casts) (group_concat(distinct ?director;separator=", ") as ?directors) (group_concat(distinct ?writer;separator=", ") as ?writers) (group_concat(distinct ?genre;separator=", ") as ?genres) ?description ?rating ?releaseDate ?company ?runtime
             WHERE {{
                 ?movie rdf:type dbo:movie ;
                 rdfs:label ?title ;
@@ -45,7 +45,7 @@ class SparqlRepository:
                 dbo:Work\/runtime ?runtime .
                 filter( !(regex(lcase(?cast), "not available")) && !(regex(lcase(?director), "not available")) && !(regex(lcase(?writer), "not available")) {})
             }}
-            group by ?title ?description ?genre ?rating ?releaseDate ?company ?runtime
+            group by ?title ?description ?rating ?releaseDate ?company ?runtime
             LIMIT {}
         """.format(filters,limit)
         # return query
